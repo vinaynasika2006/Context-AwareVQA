@@ -1,118 +1,85 @@
-# 🧠 Context-Aware Bias-Resilient VQA System
+# 🧠 Context-Aware Visual Question Answering System
 
-This project implements a Visual Question Answering (VQA) system that can understand an image and answer user questions about it. The system enhances accuracy by incorporating contextual understanding and improves fairness by applying basic bias mitigation techniques.
+A Visual Question Answering (VQA) system that extracts image context using pretrained BLIP and combines it with user questions to generate answers.
 
----
+## 🚀 Features
 
-## 🚀 Overview
+- Image-based question answering
+- Context extraction using BLIP
+- Context-enhanced VQA
+- Rule-based answer post-processing
+- Interactive Streamlit interface
+- CPU/GPU support
 
-The system combines computer vision and natural language processing to generate meaningful answers from visual content. It uses a vision-language model to analyze images and interpret questions, producing context-aware and unbiased responses.
+## 🏗️ Architecture
 
----
-
-## ✨ Key Features
-
-* Image-based question answering
-* Context extraction using image captioning
-* Bias mitigation for fair responses
-* Multimodal learning (image + text)
-* Interactive web interface using Streamlit
-
----
-
-## 🏗️ Project Structure
-
-```
-vqa_project/
-│
-├── app.py                  # Streamlit frontend
-├── main.py                 # Main pipeline logic
-├── vqa_model.py            # VQA model (BLIP)
-├── context_extractor.py    # Context generation
-├── bias.py                 # Bias mitigation
-├── requirements.txt        # Dependencies
-└── README.md               # Documentation
-```
-
----
-
-## ⚙️ Installation
-
-Install dependencies:
-
-```
+```text
+Image
+ ↓
+BLIP Image Captioning
+ ↓
+Context Extraction
+ ↓
+Context + Question
+ ↓
+BLIP VQA
+ ↓
+Post-Processing
+ ↓
+Final Answer
+📁 Project Structure
+Context-AwareVQA/
+├── app.py
+├── main.py
+├── vqa_model.py
+├── context_extractor.py
+├── bias.py
+├── requirements.txt
+└── README.md
+⚙️ Installation
+git clone https://github.com/vinaynasika2006/Context-AwareVQA.git
+cd Context-AwareVQA
 pip install -r requirements.txt
-```
+▶️ Run
+streamlit run app.py
 
----
+Open:
 
-## ▶️ Running the Application
-
-```
-python -m streamlit run app.py
-```
-
-Then open:
-
-```
 http://localhost:8501
-```
+🧪 Usage
+Upload an image.
+Enter a question.
+Click Analyze Image.
+The system extracts context and generates an answer.
 
----
+Example:
 
-## 🧪 Usage
+Context: cricket game
 
-1. Upload an image
-2. Enter a question related to the image
-3. The system will:
+Question: What is the person doing?
 
-   * Extract contextual information
-   * Process the question
-   * Generate an answer
-4. View the result directly in the interface
+Answer: hitting ball
 
----
-
-## 🧠 Methodology
-
-1. Image input is provided by the user
-2. Context is extracted using an image captioning model
-3. The question is enhanced with contextual information
-4. A VQA model generates the answer
-5. Bias mitigation is applied to improve fairness
-6. The final answer is displayed
-
----
-
-## 🛠️ Technologies Used
-
-* Python
-* PyTorch
-* HuggingFace Transformers
-* BLIP (Vision-Language Model)
-* Streamlit
-
----
-
-## 📊 Conceptual Datasets
-
-* VQA v2
-* CLEVR
-* Visual Genome
-
----
-
-## ⚠️ Notes
-
-* The first run may take time due to model download
-* A stable internet connection is required
-* Recommended Python version: 3.10 or 3.11
-
----
-
-## 🔮 Future Improvements
-
-* Advanced bias mitigation techniques
-* Integration with newer models (BLIP-2, LLaVA)
-* Explainable AI (visual attention maps)
-* Performance optimization for real-time use
+🧠 Models
+Salesforce/blip-image-captioning-base
+Salesforce/blip-vqa-base
+🛠️ Technologies
+Python
+PyTorch
+Hugging Face Transformers
+BLIP
+Streamlit
+Pillow
+⚠️ Limitations
+Pretrained VQA models may produce incorrect answers.
+Generated context may not always be accurate.
+Rule-based post-processing is limited to predefined terms.
+No formal accuracy or fairness benchmark has been performed.
+🔮 Future Improvements
+Fine-tuning on VQA datasets
+Standard benchmark evaluation
+Better context-question fusion
+Advanced bias mitigation
+Confidence estimation
+BLIP-2/LLaVA integration
+Explainable AI
