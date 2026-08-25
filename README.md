@@ -5,29 +5,19 @@ A Visual Question Answering (VQA) system that extracts image context using pretr
 ## 🚀 Features
 
 - Image-based question answering
-- Context extraction using BLIP
+- Image context extraction
 - Context-enhanced VQA
 - Rule-based answer post-processing
-- Interactive Streamlit interface
+- Streamlit web interface
 - CPU/GPU support
 
 ## 🏗️ Architecture
 
+Image → BLIP Captioning → Context → Context + Question → BLIP VQA → Post-Processing → Answer
+
+## 📁 Project Structure
+
 ```text
-Image
- ↓
-BLIP Image Captioning
- ↓
-Context Extraction
- ↓
-Context + Question
- ↓
-BLIP VQA
- ↓
-Post-Processing
- ↓
-Final Answer
-📁 Project Structure
 Context-AwareVQA/
 ├── app.py
 ├── main.py
@@ -37,9 +27,12 @@ Context-AwareVQA/
 ├── requirements.txt
 └── README.md
 ⚙️ Installation
-git clone https://github.com/vinaynasika2006/Context-AwareVQA.git
-cd Context-AwareVQA
 pip install -r requirements.txt
+
+The required packages include PyTorch, Transformers, Pillow, and Streamlit.
+
+The pretrained BLIP models are downloaded automatically on the first run.
+
 ▶️ Run
 streamlit run app.py
 
@@ -50,16 +43,10 @@ http://localhost:8501
 Upload an image.
 Enter a question.
 Click Analyze Image.
-The system extracts context and generates an answer.
-
-Example:
-
-Context: cricket game
-
-Question: What is the person doing?
-
-Answer: hitting ball
-
+The system extracts image context.
+The context is combined with the question.
+BLIP generates an answer.
+The processed answer is displayed.
 🧠 Models
 Salesforce/blip-image-captioning-base
 Salesforce/blip-vqa-base
@@ -73,13 +60,13 @@ Pillow
 ⚠️ Limitations
 Pretrained VQA models may produce incorrect answers.
 Generated context may not always be accurate.
-Rule-based post-processing is limited to predefined terms.
-No formal accuracy or fairness benchmark has been performed.
+Answers may be short or ambiguous.
+Post-processing is limited to predefined rules.
 🔮 Future Improvements
 Fine-tuning on VQA datasets
-Standard benchmark evaluation
-Better context-question fusion
+Standard VQA evaluation
+Improved context-question fusion
 Advanced bias mitigation
 Confidence estimation
-BLIP-2/LLaVA integration
+BLIP-2 or LLaVA integration
 Explainable AI
