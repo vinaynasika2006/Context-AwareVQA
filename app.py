@@ -1,57 +1,129 @@
 import streamlit as st
 from PIL import Image
 
-st.set_page_config(page_title="VQA System", layout="centered")
+from main import VQASystem
 
-st.title("🧠 Context-Aware Bias-Resilient VQA System")
 
-# Debug / status
-st.write("✅ App started")
+st.set_page_config(
+    page_title="Context-Aware VQA",
+    page_icon="🧠",
+    layout="centered"
+)
 
-# Safe import with error handling
-try:
-    from main import VQASystem
-    st.write("✅ Model modules loaded")
-except Exception as e:
-    st.error(f"❌ Import Error: {e}")
-    st.stop()
 
-# Cache model (VERY IMPORTANT for performance)
+st.title("🧠 Context-Aware VQA")
+
+st.write(
+    "Ask questions about an image using "
+    "context extraction and visual question answering."
+)
+
+
 @st.cache_resource
 def load_system():
     return VQASystem()
 
-# UI Inputs
-uploaded_file = st.file_uploader("📷 Upload an image", type=["jpg", "png", "jpeg"])
-question = st.text_input("❓ Ask a question about the image")
 
-# Main logic
-if uploaded_file:
-    try:
-        image = Image.open(uploaded_file).convert("RGB")
-        st.image(image, caption="Uploaded Image", use_column_width=True)
-    except Exception as e:
-        st.error(f"❌ Image Error: {e}")
-        st.stop()
+st.header("📷 Upload Image")
 
-if uploaded_file and question:
+uploaded_file = st.file_uploader(
+    "Choose an image",
+    type=["jpg", "jpeg", "png"]
+)
 
-    try:
-        system = load_system()
 
-        with st.spinner("🔄 Processing... First run may take time (model download)"):
-            answer, context = system.answer_question(image, question)
+if uploaded_file is not None:
 
-        st.success("✅ Done!")
+    image = Image.open(
+        uploaded_file
+    ).convert("RGB")
 
-        st.subheader("🧠 Extracted Context")
-        st.write(context)
+    st.image(
+        image,
+        caption="Uploaded Image",
+        use_container_width=True
+    )
 
-        st.subheader("💡 Answer")
-        st.write(answer)
+    st.header("❓ Ask a Question")
 
-    except Exception as e:
-        st.error(f"❌ Runtime Error: {e}")
+    question = st.text_input(
+        "Enter your question",
+        placeholder="Example: What is the person doing?"
+    )
+
+    if st.button(
+        "🚀 Analyze Image",
+        type="primary"
+    ):
+
+        if not question.strip():
+
+            st.warning(
+                "Please enter a question."
+            )
+
+        else:
+
+            system = load_system()
+
+            with st.spinner(
+                "Processing image..."
+            ):
+
+                answer, context = system.answer_question(
+                    image,
+                    question
+                )
+
+            st.success(
+                "Analysis completed successfully!"
+            )
+
+            st.header("📊 Results")
+
+            st.subheader("🧠 Extracted Context")
+
+            st.info(context)
+
+            st.subheader("❓ Question")
+
+            st.write(question)
+
+            st.subheader("💡 Final Answer")
+
+            st.success(answer)
+
+            with st.expander(
+                "🔍 View Processing Details"
+            ):
+
+                st.write(
+                    "**Context:**"
+                )
+
+                st.write(context)
+
+                st.write(
+                    "**Question:**"
+                )
+
+                st.write(question)
+
+                st.write(
+                    "**Answer:**"
+                )
+
+                st.write(answer)
 
 else:
-    st.info("👉 Please upload an image and enter a question to proceed.")
+
+    st.info(
+        "Upload an image above to start."
+    )
+
+
+st.divider()
+
+st.caption(
+    "Context-Aware VQA | BLIP | Streamlit"
+)
