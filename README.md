@@ -11,33 +11,6 @@ A Visual Question Answering (VQA) system that extracts image context using pretr
 - Streamlit web interface
 - CPU/GPU support
 
-## 🏗️ Architecture
-
-Image → BLIP Captioning → Context → Context + Question → BLIP VQA → Post-Processing → Answer
-
-## 📁 Project Structure
-
-Context-AwareVQA/
-├── app.py
-├── main.py
-├── vqa_model.py
-├── context_extractor.py
-├── bias.py
-├── requirements.txt
-
-# 🧠 Context-Aware Visual Question Answering System
-
-A Visual Question Answering (VQA) system that extracts image context using pretrained BLIP and combines it with user questions to generate answers.
-
-## 🚀 Features
-
-- Image-based question answering
-- Image context extraction
-- Context-enhanced VQA
-- Rule-based answer post-processing
-- Streamlit web interface
-- CPU/GPU support
-
 ## 🏗️ Project Structure
 
     Context-AwareVQA/
